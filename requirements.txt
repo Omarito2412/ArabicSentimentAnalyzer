@@ -1,1 +1,3 @@
 pyaramorph
+pandas
+numpy

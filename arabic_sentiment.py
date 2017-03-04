@@ -155,6 +155,13 @@ def _build_segments(self, word):
 
     return segments
 
+def is_vulgar(words, sentence):
+	"""Checks if a given line has any of the bad words from the bad words list."""
+	for word in words:
+		if word in sentence:
+			return 1
+	return 0
+
 
 # Read lexicon
 df = pd.read_csv("ArSenL_v1.0A.txt", delimiter=";")
@@ -182,10 +189,13 @@ in_file = parser.parse_args().input
 # after modifying them
 analyzer = pyaramorph.Analyzer()
 
+# Read a list of bad words
+with open("bad.txt", "r") as bad_fp:
+	bad_words = bad_fp.read().split("\n")
+
 with io.open(in_file, "r", encoding="utf-8") as fp:
 	with open("output.csv", "w") as op:
-		op.write("Positive sentiment score,Negative sentiment score\n")
+		op.write("Positive sentiment score,Negative sentiment score,Vulgar\n")
 		for sentence in fp:
-			print(sentence)
 			score = computeSentence(df, sentence, analyzer)
-			op.write(str(score[0]) + "," + str(score[1]) + "\n")
+			op.write(str(score[0]) + "," + str(score[1]) + "," + str(is_vulgar(bad_words, sentence)) + "\n")

@@ -1,3 +1,4 @@
-Positive sentiment score,Negative sentiment score
-0.0619658119658,0.0106837606838
-0.00666666666667,0.015
+Positive sentiment score,Negative sentiment score,Vulgar
+0.0619658119658,0.0106837606838,0
+0.00555555555556,0.0125,1
+0.0,0.0,1

@@ -183,9 +183,9 @@ in_file = parser.parse_args().input
 analyzer = pyaramorph.Analyzer()
 
 with io.open(in_file, "r", encoding="utf-8") as fp:
-	sentences = fp.read().splitlines()
-	results = computeDataset(df, sentences, analyzer)
 	with open("output.csv", "w") as op:
 		op.write("Positive sentiment score,Negative sentiment score\n")
-		for score in results:
+		for sentence in fp:
+			print(sentence)
+			score = computeSentence(df, sentence, analyzer)
 			op.write(str(score[0]) + "," + str(score[1]) + "\n")
